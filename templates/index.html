@@ -5,7 +5,9 @@
 	<script>
 		var loadFile = function(event) {
 			var image = document.getElementById('output');
+			var imagenew = document.getElementById('image');
 			image.src = URL.createObjectURL(event.target.files[0]);
+			imagenew.src="#";
 		};
 </script>
 <link rel="stylesheet" href="static/css/style.css">
