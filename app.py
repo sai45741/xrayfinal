@@ -24,11 +24,11 @@ def predict():
     uploaded_file = request.files['file']
     print(uploaded_file)
     print(uploaded_file.filename)
-    full_filename =os.path.join(app.config['UPLOAD_FOLDER'], 'images', secure_filename(uploaded_file.filename))
+    full_filename =os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(uploaded_file.filename))
     print(full_filename)
     if uploaded_file.filename != '':
         filename=uploaded_file.filename
-        uploaded_file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'images', secure_filename(uploaded_file.filename)))
+        uploaded_file.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(uploaded_file.filename)))
     img = cv2.imread(full_filename,cv2.IMREAD_GRAYSCALE)
     img1=cv2.resize(img,(88,88))
     x_in=img1.reshape(88,88,1)
