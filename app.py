@@ -25,7 +25,7 @@ def predict():
     uploaded_file = request.files['file']
     print(uploaded_file)
     print(uploaded_file.filename)
-    full_filename =uploaded_file.save(os.path.join(app.instance_path, 'images', secure_filename(uploaded_file.filename)))
+    full_filename =os.path.join(app.instance_path, 'images', secure_filename(uploaded_file.filename))
     print(full_filename)
     if uploaded_file.filename != '':
         filename=uploaded_file.filename
