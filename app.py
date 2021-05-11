@@ -5,16 +5,14 @@ from keras.models import load_model
 import os
 from werkzeug.utils import secure_filename
 import cv2
-from run import app
 
-os.makedirs(os.path.join(app.instance_path, 'images'), exist_ok=True)
 
 #IMAGE_FOLDER = os.path.join('static', 'images')
 
 app = Flask(__name__)
 #app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 #app.config['UPLOAD_FOLDER'] = IMAGE_FOLDER
-
+os.makedirs(os.path.join(app.instance_path, 'images'), exist_ok=True)
 
 loaded_model = load_model('cnn_model.h5')
 
