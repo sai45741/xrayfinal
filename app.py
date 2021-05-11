@@ -5,7 +5,7 @@ from keras.models import load_model
 import os
 from werkzeug.utils import secure_filename
 import cv2
-
+from run import app
 
 os.makedirs(os.path.join(app.instance_path, 'images'), exist_ok=True)
 
