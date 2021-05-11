@@ -3,17 +3,16 @@ from flask import Flask, request, jsonify, render_template, redirect, url_for
 import keras
 from keras.models import load_model
 import os
-import cv2
-from werkzeug.utils import secure_filename
-#from run import app as application
-#import win32api
+from werkzeug.utils import secure_filenameimport cv2
 
-IMAGE_FOLDER = os.path.join('static', 'images')
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+
+os.makedirs(os.path.join(app.instance_path, 'images'), exist_ok=True)
+
+#IMAGE_FOLDER = os.path.join('static', 'images')
 
 app = Flask(__name__)
-app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-app.config['UPLOAD_FOLDER'] = IMAGE_FOLDER
+#app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+#app.config['UPLOAD_FOLDER'] = IMAGE_FOLDER
 
 
 loaded_model = load_model('cnn_model.h5')
@@ -25,10 +24,10 @@ def home():
 @app.route('/', methods=['POST'])
 def predict():
     uploaded_file = request.files['file']
-    full_filename = os.path.join(IMAGE_FOLDER,uploaded_file.filename)
+    full_filename =uploaded_file.save(os.path.join(app.instance_path, 'images', secure_filename(uploaded_file.filename)))
     if uploaded_file.filename != '':
         filename=uploaded_file.filename
-        uploaded_file.save(full_filename)
+        uploaded_file.save(os.path.join(app.instance_path, 'images', secure_filename(uploaded_file.filename)))
     img = cv2.imread(full_filename,cv2.IMREAD_GRAYSCALE)
     img1=cv2.resize(img,(88,88))
     x_in=img1.reshape(88,88,1)
