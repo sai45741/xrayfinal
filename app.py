@@ -18,10 +18,6 @@ app.config['UPLOAD_FOLDER'] = IMAGE_FOLDER
 
 loaded_model = load_model('cnn_model.h5')
 
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
 @app.route('/')
 def home():
     return render_template('index.html')
