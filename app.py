@@ -3,7 +3,8 @@ from flask import Flask, request, jsonify, render_template, redirect, url_for
 import keras
 from keras.models import load_model
 import os
-from werkzeug.utils import secure_filenameimport cv2
+from werkzeug.utils import secure_filename
+import cv2
 
 
 os.makedirs(os.path.join(app.instance_path, 'images'), exist_ok=True)
